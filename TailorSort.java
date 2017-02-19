@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,7 +44,28 @@ public class TailorSort {
         //WRITE YOUR CODE HERE
         //RETURN THE RESULT COATS ARRAY WITH ALL SORTED
         //YOU HAVE TO DO MINIMUM COMPARISONS, CLUE: USE index parameter in your sorting technique
+    	Integer key ;
+    	
+     	for (int i = index; i < inputCoats.length ;i++ ){
+    		
+     		key = inputCoats[i];
+    		
+    		
+    		 int j = i-1;
+    			while (j >=0 && inputCoats[j] > key){
+    				
+    				inputCoats[j+1] = inputCoats[j];
+    				//smallestFound = true;
+    				j--;
+       			} 
+    			  		    			    		
+	    		inputCoats[j+1] = key;
+    		}
+    	
+    	
+    	return inputCoats;
     }
+    
 
     private static void testBench(){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
