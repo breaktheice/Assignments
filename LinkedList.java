@@ -1,37 +1,54 @@
-/**
- * Created by IceBreakers on Class 5 HW 1- Medium
- * basic operations on linked list
- * reverse a linked list using recursion
- * */
+package IceBreakers;
+
 public class LinkedList {
 
     public class Node {
-        //WRITE YOUR CODE HERE
-
-        //WRITE YOUR CLASS DEFINITION HERE
-
-        //WRITE YOUR CONSTRUCTORS HERE
+        Node next;
+        int data;
+        Node(int data) {
+        	this.data = data;
+        }
     }
     Node head;
+    Node last;
 
     //print
     public void printList(){
         //WRITE YOUR CODE HERE
+    	Node tmp=head;
+    	while(tmp!=null){
+    		System.out.println(tmp.data);
+    		tmp = tmp.next;
+    	}
     }
 
     //add
     public void addNode(int data){
         //WRITE YOUR CODE HERE
+    	Node n = new Node(data);
+    	if(head==null){
+    		head = n;
+    		last = n;
+    	} else {
+    		last.next = n;
+    		last = n;
+    	}
     }
 
     //reverse
+	Node after;
+	Node prev = null;
     public void reverseList(Node currNode){
-        //WRITE YOUR CODE HERE
-
-        //base case
-
-        //RECURSION
-        reverseList(currNode.next);
+    	if(currNode.next ==null) {
+    		currNode.next = prev;
+    		head = currNode;
+    		return;
+    	}
+    	after=currNode.next;
+    	currNode.next = prev;
+    	prev = currNode;
+    	currNode = after;
+        reverseList(currNode);
     }
 
     //test
@@ -44,7 +61,6 @@ public class LinkedList {
         reverseList.addNode(5);
         reverseList.addNode(6);
 
-
         reverseList.printList();
         System.out.println("");
         reverseList.reverseList(reverseList.head);
@@ -54,4 +70,3 @@ public class LinkedList {
         testBench();
     }
 }
-
