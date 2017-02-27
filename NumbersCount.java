@@ -1,75 +1,63 @@
-/*
- * Write a logic to count of number of numbers in the given input string
- * Input is String
- * Output will print the number of occurences for each number
- * 
- * Ex. 933262154439441526816992388562667004907159682643816
- * Output will be 
- *  0 occurs 3 times
-    1 occurs 5 times
-    2 occurs 6 times
-    3 occurs 5 times
-    4 occurs 6 times
-    5 occurs 4 times
-    6 occurs 9 times
-    7 occurs 2 times
-    8 occurs 5 times
-    9 occurs 6 times
- * 
- * Also print the output as bar graph with x axis as numbers
- * and y axis with "#"  as of number of occurences
- *  
- *  
- *               # 
- *               #
- *               #
- *       #   #   #     # 
- *     # # # #   #   # #
- *     # # # # # #   # #
- *   # # # # # # #   # #
- *   # # # # # # # # # #
- *   # # # # # # # # # #
- *   0 1 2 3 4 5 6 7 8 9 
- *   
- *   ex.2 
- *   
- *   Input: 2146859296389521599993229915608941463961565182
- *   
- *   Ouput: 
- *  0 occurs 1 times 
-    1 occurs 6 times 
-    2 occurs 6 times
-    3 occurs 3 times
-    4 occurs 3 times
-    5 occurs 6 times
-    6 occurs 6 times
-    7 occurs 0 times
-    8 occurs 4 times
-    9 occurs 11 times
 
-                       
-                       #
-                       #
- *                     #
- *                     # 
- *                     # 
- *     # #     # #     # 
- *     # #     # #     #
- *     # #     # #   # #
- *     # # # # # #   # #
- *     # # # # # #   # #
- *   # # # # # # #   # #
- *   0 1 2 3 4 5 6 7 8 9 
-
- *
- */
-
+import java.util.*;
 public class NumbersCount {
-    public NumbersCount() {
-        super();
+	String str;
+    public NumbersCount(String str) {
+        this.str= str;
+    }
+    
+    public void findCount() {
+    	int key;
+    	Map<Integer, Integer> mapcount = new TreeMap<Integer, Integer>();
+    	for(int i=0;i<str.length();i++) {
+    		key = Character.getNumericValue(str.charAt(i));
+    		if(mapcount.containsKey(key)) {
+    			mapcount.put(key, mapcount.get(key) +1);
+    		} else {
+    			mapcount.put(key, 1);
+    		}
+    	}
+    	
+    	int[] arr = new int[mapcount.size()];
+    	int c=0;
+    	int max = Integer.MIN_VALUE;
+    	for(Map.Entry entry : mapcount.entrySet()) {
+    		System.out.println(entry.getKey() + " occurs " + entry.getValue() + " times");
+    		arr[c++] = (int)entry.getKey();
+    		max = Integer.max(max, (int)entry.getValue());
+    	}
+    	System.out.println();
+    	for(int i=0;i<arr.length;i++) {
+    		System.out.print(arr[i] + " ");
+    	}
+    	System.out.println();
+    	int val;
+    	for(int j=0;j<max;j++) {
+    		for(int i=0;i<arr.length;i++) {
+    			if(!mapcount.containsKey(arr[i])) {
+    				continue;
+    			}
+    			val = (int)mapcount.get(arr[i]);
+    			if(val > 0) {
+    				System.out.print("# ");
+    				mapcount.put(arr[i], val-1);
+    			} else {
+    				System.out.print("  ");
+    			}
+    		}
+    		System.out.println();
+    	}
+    }
+    
+    public void drawGraph() {
+    	
     }
 
     public static void main(String[] args) {
-        NumbersCount numbersCount = new NumbersCount();
+        NumbersCount numbersCount = new NumbersCount("933262154439441526816992388562667004907159682643816");
+    	//NumbersCount numbersCount = new NumbersCount("2146859296389521599993229915608941463961565182");
+        
+        numbersCount.findCount();
+        numbersCount.drawGraph();
     }
 }
