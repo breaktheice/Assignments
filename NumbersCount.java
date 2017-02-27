@@ -27,26 +27,35 @@ public class NumbersCount {
     		max = Integer.max(max, (int)entry.getValue());
     	}
     	System.out.println();
-    	for(int i=0;i<arr.length;i++) {
-    		System.out.print(arr[i] + " ");
-    	}
-    	System.out.println();
+
     	int val;
-    	for(int j=0;j<max;j++) {
-    		for(int i=0;i<arr.length;i++) {
-    			if(!mapcount.containsKey(arr[i])) {
-    				continue;
-    			}
+    	char[][] res= new char[100][100];
+    	int x=0, y=0,i,j;
+    	for(j=0, x=0;j<max;j++,x++) {
+    		for(i=0, y=0;i<arr.length;i++,y++) {
     			val = (int)mapcount.get(arr[i]);
     			if(val > 0) {
-    				System.out.print("# ");
+    				res[x][y] = '#';
+    				//System.out.print("# ");
     				mapcount.put(arr[i], val-1);
     			} else {
-    				System.out.print("  ");
+    				res[x][y] = ' ';
+    				//System.out.print("  ");
     			}
+    		}
+    		//System.out.println();
+    	}
+    	
+    	for(i=x-1;i>=0;i--) {
+    		for(j=0;j<y;j++) {
+    			System.out.print(res[i][j] + " ");
     		}
     		System.out.println();
     	}
+    	for(i=0;i<arr.length;i++) {
+    		System.out.print(arr[i] + " ");
+    	}
+    	System.out.println();
     }
     
     public void drawGraph() {
@@ -56,6 +65,7 @@ public class NumbersCount {
     public static void main(String[] args) {
         NumbersCount numbersCount = new NumbersCount("933262154439441526816992388562667004907159682643816");
     	//NumbersCount numbersCount = new NumbersCount("2146859296389521599993229915608941463961565182");
+    	//NumbersCount numbersCount = new NumbersCount("2342523423432141324");
         
         numbersCount.findCount();
         numbersCount.drawGraph();
