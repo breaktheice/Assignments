@@ -35,7 +35,28 @@ public class MinSwap {
     }
     private static int minSwaps(int a[]){
         //WRITE YOUR CODE HERE...
+    	int i = 0;
+    	int temp = 0;
+    	int j = a.length - 1;
+    	int count = 0;
+    		
+    		while(i<j){
+    			 if(a[i]==0){
+    				if(a[j]!=0){
+    				temp = a[i];
+    				a[i] = a[j];
+    				a[j] = temp;
+    				count = count+1;
+    				i++;
+    				}
+    				j--; 	
+
+    			}
+    			else i++;
+    			}
+    	return count;
     }
+    
     private static void testBench(){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
         int[] a1 = {1,2,0,3,0,4,5};
@@ -48,7 +69,7 @@ public class MinSwap {
 
     public static void main(String args[]){
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
-        System.out.println("MinSwamp.java");
+        System.out.println("MinSwap.java");
         testBench();
         System.out.println("DONE");
     }
