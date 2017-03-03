@@ -4,14 +4,13 @@
  * Given a non-negative int n, return the sum of its digits recursively (no loops).
  * Note that mod (%) by 10 yields the rightmost digit (126 % 10 is 6),
  * while divide (/) by 10 removes the rightmost digit (126 / 10 is 12).
-
  * sumDigits(126) → 9
  * sumDigits(49) → 13
  * sumDigits(12) → 3
  */
 public class SumOfDigits {
-
-    public static void myassert(boolean  x) {
+ 
+	 public static void myassert(boolean  x) {
         //CANNOT CHANGE CODE BELOW. MUST USE AS IS
         if (!x) {
             throw new IllegalArgumentException("Assert fail") ;
@@ -20,11 +19,20 @@ public class SumOfDigits {
 
     public static int sumDigits(int n){
         //WRITE YOUR CODE HERE
-
-        //base case
-
+    	
+    	int lastDigit =0;
+        //Base case
+    	if(n==0){
+    		return 0;
+    	} 	
         //recursion case
-
+    	lastDigit = n % 10;
+    	n= n / 10;
+    	//sum = sum + lastDigit;
+    	//sumDigits(n);
+    	
+    	return lastDigit + sumDigits(n);
+    	
     }
 
     private static void testBench(){
