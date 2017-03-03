@@ -43,6 +43,36 @@ public class TailorSort {
         //WRITE YOUR CODE HERE
         //RETURN THE RESULT COATS ARRAY WITH ALL SORTED
         //YOU HAVE TO DO MINIMUM COMPARISONS, CLUE: USE index parameter in your sorting technique
+    	int i = index;
+    	int j = index - 1;
+    	int n = inputCoats.length;
+    	int temp , temp1;
+    	
+    	int checks =0;
+    	while(i<n){
+    		checks++;
+    		if(inputCoats[i]< inputCoats[i-1]){
+    			temp = inputCoats[i];
+    			inputCoats[i] = inputCoats[i-1];
+    			inputCoats[i-1] = temp;
+    		
+    		j = i-1;
+    		while(j>0){
+        		checks++;
+    			if(inputCoats[j] < inputCoats[j-1]){
+    				temp1 = inputCoats[j];
+    				inputCoats[j] = inputCoats[j-1];
+    				inputCoats[j-1] = temp1;
+    			}
+    			else
+    				break;
+    			j--;
+    		}
+    		}
+    		i++;
+    	}
+    	System.out.println(" total checks "+ checks);
+    	return inputCoats;
     }
 
     private static void testBench(){
