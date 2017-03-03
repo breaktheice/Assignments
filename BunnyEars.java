@@ -13,10 +13,19 @@ public class BunnyEars {
 
     public static int bunnyEars2(int bunnies) {
         // Base Case
+    	int total = 0;
         if(bunnies == 0){
             return 0;
         }
         //WRITE YOUR CODE HERE
+        else{
+        	if(bunnies%2==0){
+        		total = 3 + bunnyEars2(bunnies-1);
+        	}
+        	else
+        		total = 2 + bunnyEars2(bunnies-1);
+        }
+        return total;
     }
 
     public static void myassert(boolean  x) {
