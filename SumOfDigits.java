@@ -20,11 +20,19 @@ public class SumOfDigits {
 
     public static int sumDigits(int n){
         //WRITE YOUR CODE HERE
-
+    	int total =0;
+    	if(n==0){
+    	   return total;
+    	}
         //base case
-
+    	else{
+    		
+    	total= n%10 + sumDigits(n/10);
+    	}
         //recursion case
-
+    	System.out.println(total);
+    	return total;
+    	
     }
 
     private static void testBench(){
