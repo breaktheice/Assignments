@@ -1,75 +1,70 @@
-/*
- * Write a logic to count of number of numbers in the given input string
- * Input is String
- * Output will print the number of occurences for each number
- * 
- * Ex. 933262154439441526816992388562667004907159682643816
- * Output will be 
- *  0 occurs 3 times
-    1 occurs 5 times
-    2 occurs 6 times
-    3 occurs 5 times
-    4 occurs 6 times
-    5 occurs 4 times
-    6 occurs 9 times
-    7 occurs 2 times
-    8 occurs 5 times
-    9 occurs 6 times
- * 
- * Also print the output as bar graph with x axis as numbers
- * and y axis with "#"  as of number of occurences
- *  
- *  
- *               # 
- *               #
- *               #
- *       #   #   #     # 
- *     # # # #   #   # #
- *     # # # # # #   # #
- *   # # # # # # #   # #
- *   # # # # # # # # # #
- *   # # # # # # # # # #
- *   0 1 2 3 4 5 6 7 8 9 
- *   
- *   ex.2 
- *   
- *   Input: 2146859296389521599993229915608941463961565182
- *   
- *   Ouput: 
- *  0 occurs 1 times 
-    1 occurs 6 times 
-    2 occurs 6 times
-    3 occurs 3 times
-    4 occurs 3 times
-    5 occurs 6 times
-    6 occurs 6 times
-    7 occurs 0 times
-    8 occurs 4 times
-    9 occurs 11 times
-
-                       
-                       #
-                       #
- *                     #
- *                     # 
- *                     # 
- *     # #     # #     # 
- *     # #     # #     #
- *     # #     # #   # #
- *     # # # # # #   # #
- *     # # # # # #   # #
- *   # # # # # # #   # #
- *   0 1 2 3 4 5 6 7 8 9 
-
- *
- */
-
-public class NumbersCount {
-    public NumbersCount() {
-        super();
+package IceBreakers;
+import java.util.*;
+public class NumbersCountRec {
+	String str;
+    public NumbersCountRec(String str) {
+        this.str= str;
     }
+    public NumbersCountRec(){
+    	this.str = "";
+    }
+    
+    
+    public void findCount() {
+    	
+    	if(str.isEmpty() || (! str.matches("\\d+"))) {
+    		System.out.println("Invalid Input");
+    		return;
+    	}
 
+    	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+    	int arr[] = new int[10];
+    	int num;
+    	for(int i=0;i<str.length();i++) {
+    		num = Character.getNumericValue(str.charAt(i));
+    		if(map.containsKey(num)) {
+    			map.put(num,  map.get(num)+1);
+    		} else {
+    			map.put(num, 1);
+    		}
+			arr[num] = map.get(num);
+    	}
+    	for(int i=0;i<arr.length;i++) {
+    		System.out.print(i + " ");
+    	}
+    	System.out.println();
+    	
+    	drawChart(arr, 0);
+    	
+    }
+    
+    void drawChart(int[] arr, int flag) {
+
+    	for(int i=0;i<arr.length;i++) {
+    		if(arr[i] != 0) {
+    			System.out.print("# ");
+    			arr[i]--;
+    			flag = 1;
+    		} else {
+    			System.out.print("  ");
+    		}
+    	}
+    	System.out.println();
+    	if(flag == 0) return;
+    	drawChart(arr, 0);
+    }
     public static void main(String[] args) {
-        NumbersCount numbersCount = new NumbersCount();
+        NumbersCountRec numbersCount = new NumbersCountRec("933262154439441526816992388562667004907159682643816");
+    	//NumbersCountRec numbersCount = new NumbersCountRec("2146859296389521599993229915608941463961565182");
+    	//NumbersCountRec numbersCount = new NumbersCountRec("2342523423432141324");
+    	NumbersCountRec numbersCount1 = new NumbersCountRec("");
+    	
+    	NumbersCountRec numbersCount2 = new NumbersCountRec("abc");
+    	NumbersCountRec numbersCount3 = new NumbersCountRec();
+    	
+        numbersCount.findCount();
+        numbersCount1.findCount();
+        numbersCount2.findCount();
+        numbersCount3.findCount();
     }
 }
