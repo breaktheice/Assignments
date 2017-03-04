@@ -1,3 +1,62 @@
+/*
+Input String: 933262154439441526816992388562667004907159682643816
+
+            #       
+            #       
+            #       
+    #   #   #     # 
+  # # # #   #   # # 
+  # # # # # #   # # 
+# # # # # # #   # # 
+# # # # # # # # # # 
+# # # # # # # # # # 
+# # # # # # # # # # 
+0 1 2 3 4 5 6 7 8 9 
+
+
+Input String: 2146859296389521599993229915608941463961565182
+
+                  # 
+                  # 
+                  # 
+                  # 
+                  # 
+  # #     # #     # 
+  # #     # #     # 
+  # #     # #   # # 
+  # # # # # #   # # 
+  # # # # # #   # # 
+# # # # # # #   # # 
+# # # # # # # # # # 
+0 1 2 3 4 5 6 7 8 9 
+
+
+Input String: 2342523423432141324
+
+    #               
+    # # #           
+    # # #           
+    # # #           
+  # # # #           
+  # # # # #         
+# # # # # # # # # # 
+0 1 2 3 4 5 6 7 8 9 
+
+
+Input String: 
+Invalid Input
+
+
+Input String: abc
+Invalid Input
+
+
+Input String: 
+Invalid Input
+
+*/
+
+
 package IceBreakers;
 import java.util.*;
 public class NumbersCountRec {
@@ -19,7 +78,7 @@ public class NumbersCountRec {
     	}
 
     	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-    	int arr[] = new int[10];
+    	int arr[] = new int[10];	
     	int num;
     	int max = Integer.MIN_VALUE;
     	for(int i=0;i<str.length();i++) {
