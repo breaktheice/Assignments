@@ -36,6 +36,7 @@
  *   Input: 2146859296389521599993229915608941463961565182
  *   
  *   Ouput: 
+ *   '\]
  *  0 occurs 1 times 
     1 occurs 6 times 
     2 occurs 6 times
@@ -65,11 +66,122 @@
  */
 
 public class NumbersCount {
+	int[] count = new int[10];
+
+
     public NumbersCount() {
         super();
     }
 
     public static void main(String[] args) {
         NumbersCount numbersCount = new NumbersCount();
+        numbersCount.testBench();
+    }
+    
+    public void printGraph(int[] count){
+    	int column=0;
+    	int rows = count.length;
+    	for(int i=0;i<count.length;i++){
+    		if(count[i]>column){
+    			column = count[i];
+    		}
+    		
+    	}
+	    for(int j =column; j>0;j--){
+
+    	for(int i = 0; i<rows; i++){
+    	        if(count[i]==j){
+    	        	System.out.print("#" + " ");
+    	        	count[i]=count[i]-1;
+    	        }
+    	        else
+    	        	System.out.print(" " + " ");
+    	    }
+    	    System.out.print("\n");
+    	}
+    	for(int i = 0; i<rows; i++){
+    		System.out.print(i + " ");
+    	}
+
+    	
+    }
+    
+    public int[] numberCount(String input){
+    	int index = input.length()-1;
+    	String newInput;
+
+    	if(index<0){
+    		
+    		return count;
+    	}
+    	
+    	if(input.charAt(index)=='0'){
+    		count[0] += 1;
+    	}
+    	else if(input.charAt(index)=='1'){
+    		count[1] += 1;
+
+    	}
+    	else if(input.charAt(index)=='2'){
+    		count[2] += 1;
+
+    	}
+    	else if(input.charAt(index)=='3'){
+    		count[3] += 1;
+
+    	}
+    	else if(input.charAt(index)=='4'){
+    		count[4] += 1;
+
+    	}
+    	else if(input.charAt(index)=='5'){
+    		count[5] += 1;
+
+    	}
+    	else if(input.charAt(index)=='6'){
+    		count[6] += 1;
+
+    	}
+    	else if(input.charAt(index)=='7'){
+    		count[7] += 1;
+
+    	}
+    	else if(input.charAt(index)=='8'){
+    		count[8] += 1;
+
+    	}
+    	else if(input.charAt(index)=='9'){
+    		count[9] += 1;
+
+    	}
+    	
+    	
+    	newInput = input.substring(0, index);
+    	numberCount(newInput);
+    	return count;
+    }
+    
+    public void testBench(){
+    	int[] counter = numberCount("2146859296389521599993229915608941463961565182");
+    	for(int i=0;i<10;i++){
+    		System.out.println(i +" " + "Occurs" + " " + counter[i] +" " + "times");
+    		
+    	}
+    	
+    	System.out.println("\n");
+    	printGraph(counter);
+    	System.out.println("\n");
+
+    	count = new int[10];
+    	int[] newcount = numberCount("933262154439441526816992388562667004907159682643816");
+    	for(int i=0;i<10;i++){
+    		System.out.println( i +" " + "Occurs" + " " + newcount[i] +" " + "times");
+    		
+    	}
+    	
+    	System.out.println("\n");
+
+    	printGraph(newcount);
+
     }
 }
