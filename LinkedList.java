@@ -7,31 +7,56 @@ public class LinkedList {
 
     public class Node {
         //WRITE YOUR CODE HERE
-
+    	int data;
         //WRITE YOUR CLASS DEFINITION HERE
-
+    	Node next;
         //WRITE YOUR CONSTRUCTORS HERE
+    	public  Node(int data){
+        	this.data = data;
+        }
     }
     Node head;
+    
+    
 
     //print
     public void printList(){
         //WRITE YOUR CODE HERE
+    	Node curr = head;
+    	while(curr!=null){
+    		System.out.println(curr.data);
+    		curr = curr.next;
+    	}
     }
 
     //add
     public void addNode(int data){
         //WRITE YOUR CODE HERE
+    	Node curr = head;
+    	Node newNode = new Node(data);
+    	if(head == null){
+    		head = newNode;
+    	}
+    	else{
+    		while(curr.next!=null){
+    			curr = curr.next;
+    		}
+    		curr.next = newNode;
+    	}
     }
 
     //reverse
     public void reverseList(Node currNode){
         //WRITE YOUR CODE HERE
-
         //base case
-
-        //RECURSION
+    	if(currNode.next==null){
+    		head = currNode;
+    		return;
+    	}
         reverseList(currNode.next);
+        currNode.next.next= currNode;
+        currNode.next=null;
+        //RECURSION
     }
 
     //test
