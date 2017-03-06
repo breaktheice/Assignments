@@ -1,5 +1,15 @@
 package IceBreakers;
 
+/*
+Input :
+Input :a
+Output :a
+Input :aabcccccaaa
+Output :a2b1c5a3
+Input :abcdedf
+Output :abcdedf
+*/
+
 public class StringCompression {
 	String str;
 	StringCompression(String str) {
