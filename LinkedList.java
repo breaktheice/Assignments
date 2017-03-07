@@ -102,8 +102,7 @@ public class LinkedList {
 
         reverseList.printList();
         System.out.println("");
-        System.out.println("before");
-       reverseList.reverseList(reverseList.head);
+        reverseList.reverseList(reverseList.head);
        
         reverseList.printList();
     }
