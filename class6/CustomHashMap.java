@@ -40,6 +40,12 @@ public class CustomHashMap {
      */
     public String get(final String key) {
 
+    	int hashValue = hash(key);
+    	Entry entry = myMap[hashValue];
+    	if(entry == null)
+    		return null;
+    	else
+    	return entry.value;
     }
 
     /*
@@ -48,21 +54,52 @@ public class CustomHashMap {
      */
     public void remove(final String key) {
 
+    	int hashValue = hash(key);
+    	Entry entry = myMap[hashValue];
+    	entry.value = null;
+    	count--;
+    	
     }
 
     // Write this method to add entries to the map.
     public void put(final String key, final String value) {
-
+    	
+    	if(get(key) != null){
+    		
+    		int hashValue = hash(key);
+        	myMap[hashValue]=new Entry(key,value);
+        	
+    		
+    	}
+    	else{
+    			if(!isFull()){
+    			int hashValue = hash(key);
+    			myMap[hashValue]=new Entry(key,value);
+    			count++;
+    			}
+    			else
+    				System.out.println("HashMap is Full");
+    	}
+    	
+    	
     }
+    
 
     // check whether if the hashmap is full for not.
     public boolean isFull() {
+    	//System.out.println("count"+count);
+    	if(count == length-1)
+    		return true;
+    	else
+    		return false;   		
+    	
+    	
     }
     
     // This method will be used in both put and get methods.
     // Given a key, this method will return the position/bucket index of the array
     private int hash(String key) {
-		return Math.abs(key.hashCode()) % size;
+		return Math.abs(key.hashCode()) % length;
     }
 
     
@@ -74,17 +111,17 @@ public class CustomHashMap {
         myMap.put("Facebook", "Menlo Park");
         myMap.put("Twitter", "San Francisco");
         myMap.put("Amazon", "Seattle");
-        myassert(myMap.get("Apple").equalsIngoreCase("Cupertino"));
-        myassert(myMap.get("Twitter").equalsIngoreCase("San Francisco"));
-        myassert(myMap.get("Facebook").equalsIngoreCase("Menlo Park"));
+        myassert(myMap.get("Apple").equalsIgnoreCase("Cupertino"));
+        myassert(myMap.get("Twitter").equalsIgnoreCase("San Francisco"));
+        myassert(myMap.get("Facebook").equalsIgnoreCase("Menlo Park"));
         myMap.put("Amazon", "Sunnyvale");
         myMap.remove("Twitter");
-        myassert(myMap.get("Amazon").equalsIngoreCase("Sunnyvale"));
+        myassert(myMap.get("Amazon").equalsIgnoreCase("Sunnyvale"));
         myMap.put("Paypal", "San Jose");
-        myassert(myMap.get("Paypal").equalsIngoreCase("San Jose"));
+        myassert(myMap.get("Paypal").equalsIgnoreCase("San Jose"));
         myMap.put("Slack", "San Francisco");
         myMap.put("Oracle", "Foster City");
-        myassert(myMap.get("Slack").equalsIngoreCase("San Francisco"));
+        myassert(myMap.get("Slack").equalsIgnoreCase("San Francisco"));
 
     }
 }
