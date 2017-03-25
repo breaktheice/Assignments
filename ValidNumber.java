@@ -1,4 +1,6 @@
-public ValidNumber() {
+public class ValidNumber {
+
+	public ValidNumber() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -8,7 +10,7 @@ public ValidNumber() {
 			return false;
 		int countDot =0;
 		Character c = inputString.charAt(0);
-		if( c == '-' || c == '.' || c == '+' || (c >= 48 && c <= 57)){
+		if( ((c == '-' || c == '.' || c == '+' ) && (inputString.length() > 1)) || (c >= 48 && c <= 57) ){
 			if( c == '.')
 				countDot++;
 
@@ -45,8 +47,8 @@ public ValidNumber() {
 		System.out.println("-12.499.00 is "+output);
 		output = isValid("-124-555");
 		System.out.println("-124-555 is "+output);
+		output = isValid(".");
+		System.out.println(" . is "+output);
 		
 
 	}
-
-}
