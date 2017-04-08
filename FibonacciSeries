@@ -1,0 +1,53 @@
+
+public class FibonacciSeries {
+
+	public FibonacciSeries() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int nthFibonacciElement(int n){
+		int prevSum = 1;
+		int sum = 0;
+		for(int i = 2; i <= n; i++){
+			int temp = sum;
+			 System.out.print(" " + sum); 
+			 
+			 sum = sum + prevSum;
+			 prevSum =  temp;
+			 
+			 
+		}
+		System.out.print(" " + sum); 
+		System.out.println();
+		return sum ;
+		
+	}
+	
+	// using recursion
+	
+	public int nthFibonacciElementRecursive(int n){
+		
+		if(n == 0 || n == 1)
+			return 0;
+		if( n == 2)
+			return 1;
+		
+		
+		return nthFibonacciElementRecursive(n-1) + nthFibonacciElementRecursive(n-2) ;
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		FibonacciSeries fibonacciSeries = new FibonacciSeries();
+		int element = fibonacciSeries.nthFibonacciElement(5);
+		System.out.println("5th fibonacii element is " + element);
+		
+		//using recursion
+		element = fibonacciSeries.nthFibonacciElementRecursive(6);
+		System.out.println("6th fibonacii element is " + element);
+			
+
+	}
+
+}
