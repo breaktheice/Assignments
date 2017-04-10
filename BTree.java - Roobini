@@ -1,0 +1,337 @@
+import java.util.Stack;
+import java.util.concurrent.LinkedBlockingQueue;
+
+
+
+public class BTree   {
+
+	public  class Node{
+		 int data;
+		 Node left;
+		 Node right;
+		
+		public Node(int data){
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+	Node root;
+	
+	public Node getRoot() {
+		return root;
+	}
+
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+
+	// Manually creating a binary tree//
+	public void createTree(){
+	Node l31 = new Node(4);
+	l31.left = new Node(8);
+	l31.right = new Node(9);
+	
+	Node l32 = new Node(5);
+	l32.left = new Node(10);
+	l32.right = new Node(11);
+	
+	Node l33 = new Node(6);
+	l33.left = new Node(12);
+	
+	Node l34 = new Node(7);
+	l34.left = new Node(13);
+	l34.right = new Node(14);
+	
+	Node l21 = new Node(2);
+	l21.left = l31;
+	l21.right = l32;
+	
+	Node l22 = new Node(3);
+	l22.left = l33;
+	l22.right = l34;
+	
+	root = new Node(1);
+	root.left = l21;
+	root.right = l22;
+	
+	}
+	
+	// creating a Binary Search Tree that grows dynamically//
+	public void insert(int data){
+		root = insertRec(root , data);
+	}
+	
+	public Node insertRec( Node root , int data){
+		if(root == null){
+			root = new Node(data);
+			return root;
+		}
+		else if(data < root.data){
+			root.left = insertRec(root.left , data);
+		}
+		else if(data > root.data){
+			root.right = insertRec(root.right , data);
+		}
+		return root;
+	}
+	
+	// In Order Traversal//
+	public  void printInOrder(Node root){
+		if(root == null){
+			return;
+		}
+		printInOrder(root.left);
+		System.out.print(root.data + " ");
+		printInOrder(root.right);
+	}
+	
+	//Pre Order Traversal//
+	public  void printPreOrder(Node root){
+		if(root == null){
+			return;
+		}
+		System.out.print( root.data + " ");
+
+		printPreOrder(root.left);
+		printPreOrder(root.right);
+
+	}
+	
+	//Post Order Traversal//
+	public void printPostOrder(Node root){
+		if(root == null){
+			return;
+		}
+		printPostOrder(root.left);
+		printPostOrder(root.right);
+		System.out.print(root.data + " " );
+	}
+	
+	// Level Order Traversal//
+	public void levelOrder( Node root){
+		LinkedBlockingQueue<Node> levelQue = new LinkedBlockingQueue<>();
+		Node temp; int level = 0;
+		if(root == null){
+			System.out.println("Tree Empty");
+		}
+		if(root != null){
+			levelQue.add(root);
+		}
+		while(!levelQue.isEmpty()){
+			level = levelQue.size();
+			while(level > 0){
+			temp = levelQue.remove();
+			
+			System.out.print(temp.data + " ");
+			if(temp.left != null){
+				levelQue.add(temp.left);
+			}
+			if(temp.right != null){
+				levelQue.add(temp.right);
+			}
+			level--;
+		}
+			System.out.println("\n");
+		}
+		
+	}
+	
+	// Zig Zag Traversal//
+	public void zigzagTraversal(Node root){
+		Stack<Node> currLevel = new Stack<>();
+		Stack<Node> nextLevel = new Stack<>();
+		Stack<Node> tempStack = new Stack<>();
+		boolean left2Right = true;
+		Node temp;
+		
+		if(root == null)
+			System.out.println("Tree is empty");
+		if(root != null){
+			currLevel.push(root);
+		}
+		
+		while(!currLevel.isEmpty()){
+			temp = currLevel.pop();
+			System.out.print(temp.data + " ");
+
+			if(left2Right){
+				if(temp.left != null)
+					nextLevel.push(temp.left);
+				if(temp.right != null)
+				nextLevel.push(temp.right);
+			}
+			else {
+				if(temp.right != null)
+					nextLevel.push(temp.right);
+				if(temp.left != null)
+					nextLevel.push(temp.left);
+			}
+
+		
+		if(currLevel.isEmpty()){
+
+			if(left2Right){
+				left2Right = false;
+			}
+			else{
+				left2Right = true;
+			}
+			
+		
+			while(!nextLevel.isEmpty()){
+				tempStack.push(nextLevel.pop());
+			}
+			while(!tempStack.isEmpty()){
+				currLevel.push(tempStack.pop());
+				
+			}
+		}
+		}
+	}
+	
+	// Search a node in a tree//
+	public void searchTree(Node root, int data){
+		
+		if(root == null ){
+			System.out.println("\n" + data + " not found");
+			return;
+		}
+		if(root.data == data){
+			System.out.println("\n" + data + "is present");
+			return;
+			
+		}
+		
+		if(data < root.data){
+			 searchTree(root.left , data);
+		}
+		if(data > root.data){
+			 searchTree(root.right , data);
+		}
+	}
+	
+	// Delete all nodes in a tree//
+	public void deleteTree(Node root1){
+		if(root1 == null){
+			return;
+		}
+			deleteTree(root1.left);
+			deleteTree(root1.right);
+			
+			root1.left = null;
+			root1.right = null;	
+			System.out.println(" Delete  "+ root1.data);
+			root1 = null;
+			root = root1;
+
+		return ;
+	}
+	
+	// height of the tree //
+	public int heightOfTree(Node root){
+		int leftHt = 0 ; int rightHt = 0;
+		if(root == null)
+			return 0;
+		if(root.left != null)
+			leftHt = heightOfTree(root.left);
+		if(root.right != null)
+			rightHt = heightOfTree(root.right);
+		
+		if(leftHt > rightHt)
+			return leftHt + 1;
+		else
+			return rightHt + 1;
+	}
+	
+	// Depth of a node from the root//
+	public int depthOfNode(Node root, int input){
+		int leftDp = 0;
+		int rightDp = 0;
+		if( root == null || input == root.data)
+			return 0;
+		if(input < root.data && root.left != null)
+			leftDp = 1 + depthOfNode(root.left , input);
+		if(input > root.data && root.right != null)
+			rightDp = 1 + depthOfNode(root.right , input);
+
+		return leftDp + rightDp ;
+		
+	}
+	
+	
+	
+	public static void main(String[] args){
+		
+		BTree myTree = new BTree();
+		myTree.createTree();
+		
+		BTree bSearchTree = new BTree();
+		bSearchTree.insert(8);
+		bSearchTree.insert(4);
+		bSearchTree.insert(11);
+		bSearchTree.insert(2);
+		bSearchTree.insert(6);
+		bSearchTree.insert(10);
+		bSearchTree.insert(13);
+		bSearchTree.insert(1);
+		bSearchTree.insert(3);
+		bSearchTree.insert(5);
+		bSearchTree.insert(7);
+		bSearchTree.insert(9);
+		bSearchTree.insert(12);
+		bSearchTree.insert(14);
+
+		// Traversal of binary Tree//
+		System.out.println("In Order Traversal:" + " ");
+		myTree.printInOrder(myTree.root);
+		System.out.println();
+
+		System.out.println("Pre Order Traversal:" + " ");
+		myTree.printPreOrder(myTree.root);
+		System.out.println();
+		
+		System.out.println("Post Order Traversal:" + " ");
+		myTree.printPostOrder(myTree.root);
+		
+		System.out.println("\n" + "Level Order Traversal:" + " ");
+		myTree.levelOrder(myTree.root);
+		
+		System.out.println("\n" + "Zig Zag Traversal:" + " ");
+		myTree.zigzagTraversal(myTree.root);
+		
+		myTree.deleteTree(myTree.root);
+		
+		System.out.println("\n" + "Pre Order Traversal:" + " ");
+		myTree.printPreOrder(myTree.root);
+
+		// traversal of Binary Search Tree//
+		System.out.println("\n" + "\n" + "Binary Search Tree");
+		System.out.println("\n" + "In Order Traversal:" + " ");
+		myTree.printInOrder(bSearchTree.root);
+		System.out.println();
+
+		System.out.println("Pre Order Traversal:" + " ");
+		bSearchTree.printPreOrder(bSearchTree.root);
+		System.out.println();
+		
+		System.out.println("Post Order Traversal:" + " ");
+		bSearchTree.printPostOrder(bSearchTree.root);
+		
+		System.out.println("\n" + "Level Order Traversal:" + " ");
+		bSearchTree.levelOrder(bSearchTree.root);
+
+		System.out.println("\n" + "Zig Zag Traversal:" + " ");
+		bSearchTree.zigzagTraversal(bSearchTree.root);
+		
+		bSearchTree.searchTree(bSearchTree.root, 5);
+		
+		System.out.println();
+		
+		System.out.println("Height of tree is" + " " + bSearchTree.heightOfTree(bSearchTree.root));
+		
+		System.out.println("Depth of Node is" + " " + bSearchTree.depthOfNode(bSearchTree.root , 11));
+
+	}
+	
+}
