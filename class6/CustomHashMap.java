@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class CustomHashMap {
 
     /*
@@ -39,7 +41,13 @@ public class CustomHashMap {
      * doesnt match any keys inside the map then null should be returned.
      */
     public String get(final String key) {
+    	int bucket = hash(key);
+    	if(myMap[bucket]!=null){
+    	 System.out.println(myMap[bucket].value);
+     	return myMap[bucket].value;
 
+    	}
+    	return null;
     }
 
     /*
@@ -47,44 +55,57 @@ public class CustomHashMap {
      * doesnt match any keys then do not remove anything,
      */
     public void remove(final String key) {
-
-    }
+    	int bucket = hash(key);
+    	myMap[bucket] = null;
+   }
 
     // Write this method to add entries to the map.
     public void put(final String key, final String value) {
-
+    	
+    	count++;
+    	int bucket = hash(key);
+    	myMap[bucket] = new Entry<String,String>(key,value);
+    	
     }
 
     // check whether if the hashmap is full for not.
     public boolean isFull() {
+    if(count==myMap.length-1){
+    	return true;
+    }
+    return false;
+    
     }
     
     // This method will be used in both put and get methods.
     // Given a key, this method will return the position/bucket index of the array
     private int hash(String key) {
-		return Math.abs(key.hashCode()) % size;
+		return Math.abs(key.hashCode()) % length;
     }
 
     
     public static void main(final String[] args) {
 
-        CustomHashMap myMap = new CustomHashMap(5);
-        myMap.put("Apple", "Cupertino");
-        myMap.put("Google", "Moutain View");
-        myMap.put("Facebook", "Menlo Park");
-        myMap.put("Twitter", "San Francisco");
-        myMap.put("Amazon", "Seattle");
-        myassert(myMap.get("Apple").equalsIngoreCase("Cupertino"));
-        myassert(myMap.get("Twitter").equalsIngoreCase("San Francisco"));
-        myassert(myMap.get("Facebook").equalsIngoreCase("Menlo Park"));
-        myMap.put("Amazon", "Sunnyvale");
-        myMap.remove("Twitter");
-        myassert(myMap.get("Amazon").equalsIngoreCase("Sunnyvale"));
-        myMap.put("Paypal", "San Jose");
-        myassert(myMap.get("Paypal").equalsIngoreCase("San Jose"));
-        myMap.put("Slack", "San Francisco");
-        myMap.put("Oracle", "Foster City");
-        myassert(myMap.get("Slack").equalsIngoreCase("San Francisco"));
+        CustomHashMap testMap = new CustomHashMap(5);
+        testMap.put("Apple", "Cupertino");
+        testMap.put("Google", "Moutain View");
+        testMap.put("Facebook", "Menlo Park");
+        testMap.put("Twitter", "San Francisco");
+        testMap.put("Amazon", "Seattle");
+        myassert(testMap.get("Apple").equalsIgnoreCase("Cupertino"));
+        myassert(testMap.get("Twitter").equalsIgnoreCase("San Francisco"));
+        myassert(testMap.get("Facebook").equalsIgnoreCase("Menlo Park"));
+        testMap.put("Amazon", "Sunnyvale");
+        testMap.remove("Twitter");
+        myassert(testMap.get("Amazon").equalsIgnoreCase("Sunnyvale"));
+        testMap.put("Paypal", "San Jose");
+        myassert(testMap.get("Paypal").equalsIgnoreCase("San Jose"));
+        testMap.put("Slack", "San Francisco");
+        testMap.put("Oracle", "Foster City");
+        myassert(testMap.get("Slack").equalsIgnoreCase("San Francisco"));
+        System.out.println(testMap.get("Twitter"));
+
+        
 
     }
 }
