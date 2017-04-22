@@ -20,13 +20,34 @@
 public class StockPrice {
 
     private static int maxProfit(int[] prices){
+    	if(prices==null){
+    		return 0;
+    	}
+    	int diff = 0;
+    	
+    	for(int i=0;i<prices.length-1;i++){
+    		for(int j=i+1;j<prices.length;j++){
+    			if(diff< prices[j]-prices[i]){
+    				diff = prices[j] - prices[i];
+    			}
+    		}
+    		
+    	}
+    	return diff;
 
     }
 
     public static void testBench(){
         //null case
+    	int[] prices = null;
+    	System.out.println(maxProfit(prices));
         // 1 element case
+    	int[] prices1 = {7,1,5,3,6,4};
+    	System.out.println("maximum profit is" + maxProfit(prices1));
         // multiple elements case
+    	int[] prices2 = {7,6,4,3,1};
+    	System.out.println("maximum profit is" + maxProfit(prices2));
+
     }
     public static void main(String args[]){
         testBench();
