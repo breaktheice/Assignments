@@ -1,27 +1,62 @@
+package IceBreakers;
 
-/**
- * Created by Icebreakers on 3/5/17.
- * Implement a method to perform basic string compression using the counts
- of repeated characters.
- For example, the string aabcccccaaa would become a2blc5a3.
- If the "compressed" string would not become smaller than the original
- string, your method should return the original string.
- *
- */
-public class StringCompressor {
+/*
+Input :
+Input :a
+Output :a
+Input :aabcccccaaa
+Output :a2b1c5a3
+Input :abcdedf
+Output :abcdedf
+*/
 
-    private static String compressedString(String s){
+public class StringCompression {
+	String str;
+	StringCompression(String str) {
+		System.out.println("Input :" + str);
+		this.str = str;
+	}
+	StringCompression(){
+		
+	}
+	
+	void compress() {
+		if(str == null || str.isEmpty()) return;
+		String res = "";
+		res += str.charAt(0);
+	    char prev = str.charAt(0);
+	    int cnt = 1;
+	    char curr;
+		for(int i=1;i<str.length();i++) {
+			curr= str.charAt(i);
+			if(curr == prev) {
+				cnt++;
+				prev = curr;
+			} else {
+				res += cnt;
+				res += str.charAt(i);
+				cnt = 1;
+				prev = curr;
+			}
+		}
+		res += cnt;
+		if(res.length() > str.length()) {
+			System.out.println("Output :" + str);
+		} else {
+			System.out.println("Output :" + res);
+		}		
+	}
 
-    }
-
-    public static void testBench(){
-        //null case
-        // 1 character string
-        // string with multiple characters case
-        // compressed string > original string case
-    }
-    public static void main(String args[]){
-        testBench();
-    }
-
+	public static void main(String[] args) {
+		StringCompression comp1 = new StringCompression();
+		comp1.compress();
+		StringCompression comp2 = new StringCompression("");
+		comp2.compress();
+		StringCompression comp5 = new StringCompression("a");
+		comp5.compress();
+		StringCompression comp3 = new StringCompression("aabcccccaaa");
+		comp3.compress();
+		StringCompression comp4 = new StringCompression("abcdedf");
+		comp4.compress();
+	}
 }
