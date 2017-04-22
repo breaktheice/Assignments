@@ -20,13 +20,49 @@
 public class StockPrice {
 
     private static int maxProfit(int[] prices){
+    
+    	if (prices == null){
+    		return 0;
+       	}
+    	
+    	int max = 0;
+    	for(int i = 0; i < prices.length; i++){
+    		for(int j= i+1; j < prices.length; j++){
+    			 
+    			int diff = prices[j] - prices[i];
+    			if(diff >max)
+    				max = diff;
+    		}
+    	}
+    
+    		return max;
+    	
+    	 
 
     }
 
     public static void testBench(){
         //null case
+    	System.out.println("Array is null =" +maxProfit(null));
+    	
+    	//empty array
+    	int[] prices = { };
+       	System.out.println("Array is empty =" +maxProfit(prices));
+    	
         // 1 element case
+       	int[] prices1 = {2};
+       	if(maxProfit(prices1) == 0)
+       	System.out.println("No transaction done");
+    	
         // multiple elements case
+    	int[] prices2 = {7, 1, 5, 3, 6, 4 };
+       	System.out.println("Maximun Profit =" +maxProfit(prices2));
+       	
+       	int[] prices3 = {7, 6, 4, 3, 1};
+       	if(maxProfit(prices3) == 0)
+       	System.out.println("No transaction done");
+    	
+    	
     }
     public static void main(String args[]){
         testBench();
